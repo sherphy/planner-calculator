@@ -1,0 +1,18 @@
+.selection-container{
+  overflow-y: scroll; /* enable vertical scrolling */
+  padding: 20px; /* add padding to the content */
+  background-color: #fff; /* set background color */
+  border: 1px solid #ccc; /* add border */
+  border-radius: 10px; /* add border-radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* add box-shadow */
+  width: 300px;
+}
+
+.selection-items h1 {
+  
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,13 @@
+{
+    "emmet.preferences": {
+
+    
+    },
+    "emmet.showSuggestionsAsSnippets": true,
+    "emmet.syntaxProfiles": {
+    "#/definitions/common/properties/postDebugTask"
+    },
+    "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+    }
+}
