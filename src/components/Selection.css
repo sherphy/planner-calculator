@@ -8,6 +8,32 @@
   width: 300px;
 }
 
+/* specially for the sets under Sets category */
+.set-selection button {
+  width: 80%;
+  font-size: xx-small;
+}
+
+/* from itemCategory  */
+.uncollapsed:after {
+  margin: auto 0 auto auto;
+  content: "\2796";
+}
+
+.collapsed:after {
+  margin: auto 0 auto auto;
+  content: '\02795';
+}
+
+.item-category button,.set-category button {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding-left: 10px;
+  border-radius: 1rem;
+  background-color: #e6deff;
+  margin: 10px 0;
+}
 
 .item-details {
   display: flex;

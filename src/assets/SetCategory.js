@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ItemDetails from "./ItemDetails";
+import ItemCategory from "./ItemCategory";
 
-const ItemCategory = ({ title, items }) => {
+const SetCategory = ({ sets }) => {
     const [isActive, setIsActive] = useState(true);
 
     const handleToggle = () => {
@@ -10,20 +10,19 @@ const ItemCategory = ({ title, items }) => {
 
     return (
     <>
-    <div className="item-category">
+    <div className="set-category">
         <button onClick={handleToggle} className={isActive ? 'uncollapsed' : 'collapsed'}>
-            <h1>{title}</h1>
+            <h1>SETS</h1>
         </button>
     </div>
     {isActive && 
-        <div className="item-selection">
-            {items.map((item) => (
-                <ItemDetails key={item} itemId={item}/>
+        <div className="set-selection">
+            {sets.map((set) => (
+                <ItemCategory key={set.title} title={set.title} items={set.items}/>
             ))}
         </div>}
     </>
     );
 };
 
-
-export default ItemCategory;
+export default SetCategory;

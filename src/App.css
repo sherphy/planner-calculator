@@ -3,8 +3,11 @@
     src: url("./assets/Maplestory\ OTF\ Light.otf");
 }
 
+* {
+    font-family: 'Maplestory', Arial, Helvetica, sans-serif;
+}
+
 body {
     background-color: #DDF2FD;
-    font-family: 'Maplestory', Arial, Helvetica, sans-serif;
     color: grey;
 }
