@@ -8,12 +8,6 @@
   width: 300px;
 }
 
-/* specially for the sets under Sets category */
-.set-selection button {
-  width: 80%;
-  font-size: xx-small;
-}
-
 /* from itemCategory  */
 .uncollapsed:after {
   margin: auto 0 auto auto;
@@ -38,4 +32,10 @@
 .item-details {
   display: flex;
   align-items: center;
+}
+
+/* specially for the sets under Sets category */
+.set-selection button {
+  font-size: xx-small;
+  background-color: rgb(231, 249, 217);
 }

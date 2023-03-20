@@ -22,7 +22,7 @@ export default function ItemDetails({ itemId, points }) {
   }, [itemId]);
 
   return (
-    <div>
+    <>
       {itemData ? (
         <div
           className="item-details"
@@ -38,7 +38,7 @@ export default function ItemDetails({ itemId, points }) {
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </>
   );
 }
 

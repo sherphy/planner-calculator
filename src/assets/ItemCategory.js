@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ItemDetails from "./ItemDetails";
 
-const ItemCategory = ({ title, items }) => {
+const ItemCategory = ({ title, items, points}) => {
     const [isActive, setIsActive] = useState(true);
 
     const handleToggle = () => {
@@ -18,7 +18,7 @@ const ItemCategory = ({ title, items }) => {
     {isActive && 
         <div className="item-selection">
             {items.map((item) => (
-                <ItemDetails key={item} itemId={item}/>
+                <ItemDetails key={item} itemId={item} points={points}/>
             ))}
         </div>}
     </>
