@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function ItemDetails({ itemId, points }) {
+export default function ItemDetails({ itemId, points}) {
   const [itemData, setItemData] = useState(null);
 
   const region = "gms"; // Replace with your desired region
@@ -21,13 +21,13 @@ export default function ItemDetails({ itemId, points }) {
     fetchItemData();
   }, [itemId]);
 
+
   return (
     <>
       {itemData ? (
         <div
           className="item-details" 
-          style={{ display: "flex", alignItems: "center", margin: "0.5em 0" }}
-        >
+          style={{ display: "flex", alignItems: "center", margin: "0.5em 0" }}>
           <img
             src={`https://maplestory.io/api/${region}/${version}/item/${itemId}/icon`}
             alt={itemData.name}

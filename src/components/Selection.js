@@ -1,13 +1,13 @@
 import "./Selection.css";
 import React from "react";
 import ItemCategory from "../assets/ItemCategory";
-import SetCategory from "../assets/SetCategory"
+import ItemSetCategory from "../assets/ItemSetCategory"
 
 const Selection = () => {
   return (
     <div className="selection-container">
       <div className="selection-items">
-        <SetCategory title="Sets"
+        <ItemSetCategory title="Sets"
         sets= {[
           {
             title:"Bear Pajamas Set",

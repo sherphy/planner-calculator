@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Card = ({char, onClick, items}) => {
+  
   return (
     <div onClick={onClick} className='cards'>
         <h1>{char.toUpperCase()}</h1>

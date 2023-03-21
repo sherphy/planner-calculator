@@ -33,15 +33,20 @@ const Characters = () => {
     // get the items for the selected character from localStorage
     const getCharItems = (selectedChar) => {
         const storedItems = JSON.parse(localStorage.getItem(`${selectedChar}items`,JSON.stringify([])));
-        return storedItems || []
+        return storedItems || [];
     }
 
     const addItems = (selectedChar, newItem) => {
-        getCharItems(selectedChar);
-        const updateItems = [...storedItems, newItem];
-
-        // localStorage.setItem(`${selectedChar}items`,JSON.stringify([]));
+        const storedItems = getCharItems(selectedChar);
+        const updatedItems = [...storedItems, newItem];
+        localStorage.setItem(`${selectedChar}items`,JSON.stringify(updatedItems));
     }
+
+    // const handleItemClick = (item) => {
+    //     addItems(char, item);
+    //     deleteItems(char,item)
+    // }
+
 
     return <>
         <div className="characters">
@@ -51,7 +56,7 @@ const Characters = () => {
                         char={char}
                         key={char}
                         items={getCharItems(char)}
-                        onClick={() => setSelectedChar(char)}/>
+                        onCharClick={() => setSelectedChar(char)}/>
             /* <div className="char-items">
                         {items.map((item) => (
                             <p className="char-item" key={item.id}> 
