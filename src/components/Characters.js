@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import './Characters.css'
+import Card from '../assets/Card';
+import './Characters.css';
 
 const Characters = () => {
-    const [ign, setIgn] = useState('');
+    const [newChar, setnewChar] = useState('');
     const [chars, setChars] = useState([]);
-    const [items, setItems] = useState([]);
+    const [charItems, setCharItems] = useState([]);
+    const [selectedChar, setSelectedChar] = useState(null);
 
     //check if there are any stored characters in localStorage
     useEffect(() => {
@@ -17,40 +19,51 @@ const Characters = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         //when submitting an ign, it gives the character an ign 
-        //and then sets the character
-        if (ign) {
-            const updatedChars = [...chars, ign];
+        //and then sets the character and items
+        if (newChar) {
+            const updatedChars = [...chars, newChar];
             setChars(updatedChars);
             localStorage.setItem("characters",JSON.stringify(updatedChars));
-            setIgn("");
+            // give the new character an empty array of items
+            localStorage.setItem(`${newChar}items`,JSON.stringify([]));
+            setnewChar("");
         }
     }
 
-    const handleCharSelect = (ign) => {
-        const ignItems = JSON.parse(localStorage.getItem(ign)) || [];
-        const updatedItems = [...ignItems, items];
-        setItems(updatedItems);
+    // get the items for the selected character from localStorage
+    const getCharItems = (selectedChar) => {
+        const storedItems = JSON.parse(localStorage.getItem(`${selectedChar}items`,JSON.stringify([])));
+        return storedItems || []
     }
-    
+
+    const addItems = (selectedChar, newItem) => {
+        getCharItems(selectedChar);
+        const updateItems = [...storedItems, newItem];
+
+        // localStorage.setItem(`${selectedChar}items`,JSON.stringify([]));
+    }
+
     return <>
         <div className="characters">
             {chars.length > 0 && 
-                chars.map((ign) => (
-                <div className="cards" key="ign" onClick={() => handleCharSelect(ign)}>
-                    <h1>{ign.toUpperCase()}</h1>
-                    <div className="char-items">
+                chars.map((char) => (
+                    <Card
+                        char={char}
+                        key={char}
+                        items={getCharItems(char)}
+                        onClick={() => setSelectedChar(char)}/>
+            /* <div className="char-items">
                         {items.map((item) => (
                             <p className="char-item" key={item.id}> 
                                 {item}
                             </p>
                         ))}
-                    </div>
-                </div>
+                    </div> */
             ))}
 
             <div id="add-char" className="cards">
                 <form onSubmit={handleSubmit}>
-                <input type="text" value={ign} placeholder="Character Name" onChange={(e)=> setIgn(e.target.value)}/>
+                <input type="text" value={newChar} placeholder="Character Name" onChange={(e)=> setnewChar(e.target.value)}/>
                 <button type="submit">Add</button>
                 </form>
             </div>
