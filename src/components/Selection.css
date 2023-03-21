@@ -1,7 +1,7 @@
 .selection-container{
   overflow-y: scroll; /* enable vertical scrolling */
   padding: 20px; /* add padding to the content */
-  background-color: #fff; /* set background color */
+  background-color: #FFF6D3;
   border: 1px solid #ccc; /* add border */
   border-radius: 10px; /* add border-radius */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* add box-shadow */

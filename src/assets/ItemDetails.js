@@ -25,7 +25,7 @@ export default function ItemDetails({ itemId, points }) {
     <>
       {itemData ? (
         <div
-          className="item-details"
+          className="item-details" 
           style={{ display: "flex", alignItems: "center", margin: "0.5em 0" }}
         >
           <img

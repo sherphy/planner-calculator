@@ -1,17 +1,20 @@
 .characters {
     display: grid;
     grid-template-columns: repeat(auto-fill, 400px);
-    justify-content: space-evenly;
-    align-content: space-around;
+    justify-content:start;
+    align-content:flex-start;
 }
 
 .cards {
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: #fff;
+    background-color: #FFF6D3;
     border: 1px solid #ccc; /* add border */
     height: 300px;
     border-radius: 1rem;
     margin: 0.5rem;
+}
+
+#add-char {
+    align-items: center;
 }
