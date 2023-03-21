@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from '../assets/Card';
 import './Characters.css';
+import Selection from "./Selection";
+
 
 const Characters = () => {
     const [newChar, setnewChar] = useState('');
@@ -33,20 +35,19 @@ const Characters = () => {
     // get the items for the selected character from localStorage
     const getCharItems = (selectedChar) => {
         const storedItems = JSON.parse(localStorage.getItem(`${selectedChar}items`,JSON.stringify([])));
+        setCharItems(storedItems);
         return storedItems || [];
     }
 
     const addItems = (selectedChar, newItem) => {
-        const storedItems = getCharItems(selectedChar);
-        const updatedItems = [...storedItems, newItem];
+        const updatedItems = [...charItems, newItem];
         localStorage.setItem(`${selectedChar}items`,JSON.stringify(updatedItems));
     }
 
-    // const handleItemClick = (item) => {
-    //     addItems(char, item);
-    //     deleteItems(char,item)
-    // }
-
+    const handleItems = (newItem) => {
+        addItems(selectedChar, newItem);
+        // deleteItems(char,item)
+    }
 
     return <>
         <div className="characters">
@@ -55,7 +56,7 @@ const Characters = () => {
                     <Card
                         char={char}
                         key={char}
-                        items={getCharItems(char)}
+                        items={charItems}
                         onCharClick={() => setSelectedChar(char)}/>
             /* <div className="char-items">
                         {items.map((item) => (
@@ -65,6 +66,8 @@ const Characters = () => {
                         ))}
                     </div> */
             ))}
+                <Selection onItemClick={handleItems}/>
+
 
             <div id="add-char" className="cards">
                 <form onSubmit={handleSubmit}>
