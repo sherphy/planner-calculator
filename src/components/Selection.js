@@ -5,9 +5,10 @@ import ItemSetCategory from "../assets/ItemSetCategory"
 
 const Selection = ({onItemClick}) => {
 
-  const handleItemClick = (item) => {
-    console.log("yes");
-    onItemClick(item);
+  const handleItemClick = (e) => {
+    console.log(e.target.parentElement);
+    const itemClicked = e.target;
+    onItemClick(itemClicked);
   };
 
 
@@ -26,7 +27,7 @@ const Selection = ({onItemClick}) => {
         <ItemCategory
           title="HATS"
           items={["1005145", "1005459", "1005460", "1005965"]}
-          onItemClick={handleItemClick}
+          onItemClick={(e) => handleItemClick(e)}
         />
         <ItemCategory
           title="PETS"
