@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function ItemDetails({ itemId, points}) {
-  const [itemData, setItemData] = useState(null);
+const region = "gms"; // Replace with your desired region
+const version = "234"; // Replace with your desired version
 
-  const region = "gms"; // Replace with your desired region
-  const version = "234"; // Replace with your desired version
+export default function ItemDetails({ itemId, points, onClick}) {
+  const [itemData, setItemData] = useState(null);
 
   useEffect(() => {
     async function fetchItemData() {
@@ -26,7 +26,7 @@ export default function ItemDetails({ itemId, points}) {
     <>
       {itemData ? (
         <div
-          className="item-details" 
+          className="item-details" onClick={onClick}
           style={{ display: "flex", alignItems: "center", margin: "0.5em 0" }}>
           <img
             src={`https://maplestory.io/api/${region}/${version}/item/${itemId}/icon`}

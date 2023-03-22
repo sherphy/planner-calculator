@@ -6,6 +6,7 @@ import ItemSetCategory from "../assets/ItemSetCategory"
 const Selection = ({onItemClick}) => {
 
   const handleItemClick = (item) => {
+    console.log("yes");
     onItemClick(item);
   };
 

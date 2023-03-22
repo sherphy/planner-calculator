@@ -45,11 +45,13 @@ const Characters = () => {
     }
 
     const handleItems = (newItem) => {
+        console.log("hi");
         addItems(selectedChar, newItem);
         // deleteItems(char,item)
     }
 
     return <>
+        <Selection onItemClick={handleItems}/>
         <div className="characters">
             {chars.length > 0 && 
                 chars.map((char) => (
@@ -66,8 +68,6 @@ const Characters = () => {
                         ))}
                     </div> */
             ))}
-                <Selection onItemClick={handleItems}/>
-
 
             <div id="add-char" className="cards">
                 <form onSubmit={handleSubmit}>
