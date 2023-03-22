@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Card from '../assets/Card';
 import './Characters.css';
+import ItemDetails from "../assets/ItemDetails";
 
 const Characters = () => {
-
-    //create new character
     const [newChar, setnewChar] = useState('');
-    //array of characters
     const [chars, setChars] = useState([]);
-    //click specific character
-    const [selectedChar, setSelectedChar] = useState(null);
-    //items belonging to particular character
     const [charItems, setCharItems] = useState([]);
-    //clicking an item 
+    const [selectedChar, setSelectedChar] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
 
     //check if there are any stored characters in localStorage
@@ -41,20 +36,30 @@ const Characters = () => {
     // get the items for the selected character from localStorage
     const getCharItems = (selectedChar) => {
         const storedItems = JSON.parse(localStorage.getItem(`${selectedChar}items`,JSON.stringify([])));
+        setCharItems(storedItems);
         return storedItems || [];
     }
 
     const addItems = (selectedChar, newItem) => {
-        const storedItems = getCharItems(selectedChar);
-        const updatedItems = [...storedItems, newItem];
+        const updatedItems = [...charItems, newItem];
         localStorage.setItem(`${selectedChar}items`,JSON.stringify(updatedItems));
-        setCharItems(updatedItems);
-      }
+    }
 
-    const handleItems = (itemClicked) => {
-        addItems(selectedChar, itemClicked);
+    const handleItems = (newItem) => {
+        addItems(selectedChar, newItem);
         // deleteItems(char,item)
     }
+
+    const handleItemClick = (itemId) => {
+        console.log("hi")
+        handleItems(itemId);
+    }
+
+    const handleAddItem = (item) => {
+        const updatedItems = [...charItems, item];
+        localStorage.setItem(`${selectedChar}items`, JSON.stringify(updatedItems));
+        setCharItems(updatedItems);
+      };
 
     return (
       <>
@@ -64,16 +69,24 @@ const Characters = () => {
               <Card
                 char={char}
                 key={char}
-                items={getCharItems(char)}
-                onCharClick={() => setSelectedChar(char)
-                }
-              />
+                items={charItems}
+                onCharClick={() => setSelectedChar(char)}
+                onItemAdd={handleAddItem}
+              >
+                {/* {selectedChar && (
+                  <div id="add-item" className="cards">
+                    <ItemDetails onItemAdd={onItemAdd} />
+                  </div>
+                )} */}
+              </Card>
+              /* <div className="char-items">
+                        {items.map((item) => (
+                            <p className="char-item" key={item.id}> 
+                                {item}
+                            </p>
+                        ))}
+                    </div> */
             ))}
-            {selectedChar &&
-              <>
-              {console.log(selectedChar)}
-              </>
-            }
 
           <div id="add-char" className="cards">
             <form onSubmit={handleSubmit}>

@@ -3,12 +3,7 @@ import React from "react";
 import ItemCategory from "../assets/ItemCategory";
 import ItemSetCategory from "../assets/ItemSetCategory"
 
-const Selection = ({onItemClick}) => {
-
-  const handleItemClick = (item) => {
-    onItemClick(item);
-  };
-
+const Selection = () => {
 
   return (
     <div className="selection-container">
@@ -25,7 +20,6 @@ const Selection = ({onItemClick}) => {
         <ItemCategory
           title="HATS"
           items={["1005145", "1005459", "1005460", "1005965"]}
-          onItemClick={handleItemClick}
         />
         <ItemCategory
           title="PETS"
