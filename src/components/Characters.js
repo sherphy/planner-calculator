@@ -39,15 +39,15 @@ const Characters = () => {
         return storedItems || [];
     }
 
-    const addItems = (selectedChar, newItem) => {
+    const addItems = (newItem) => {
         const updatedItems = [...charItems, newItem];
         console.log(updatedItems);
         localStorage.setItem(`${selectedChar}items`,JSON.parse(JSON.stringify(updatedItems)));
     }
 
-    const handleItems = (newItem) => {
-        console.log(newItem);
-        // addItems(selectedChar, newItem);
+    const handleItems = (selectedItem) => {
+        console.log(selectedItem);
+        addItems(selectedItem);
         // deleteItems(char,item)
     }
 
@@ -69,6 +69,8 @@ const Characters = () => {
                         ))}
                     </div> */
             ))}
+                                    {console.log(selectedChar)};
+
 
             <div id="add-char" className="cards">
                 <form onSubmit={handleSubmit}>
