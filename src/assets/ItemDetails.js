@@ -26,7 +26,7 @@ export default function ItemDetails({ itemId, points, onClick}) {
     <>
       {itemData ? (
         <div
-          className="item-details" onClick={onClick}
+          className="item-details" onClick={onClick} data-points={points} data-item={itemId}
           style={{ display: "flex", alignItems: "center", margin: "0.5em 0" }}>
           <img
             src={`https://maplestory.io/api/${region}/${version}/item/${itemId}/icon`}

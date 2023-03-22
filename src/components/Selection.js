@@ -4,10 +4,14 @@ import ItemCategory from "../assets/ItemCategory";
 import ItemSetCategory from "../assets/ItemSetCategory"
 
 const Selection = ({onSelectionClick}) => {
+  
 
   const handleItemClick = (e) => {
     console.log(e.target.parentElement);
     const itemClicked = e.target.parentElement;
+    const points = itemClicked.dataset.points;
+    const itemId = itemClicked.dataset.item;
+    console.log(points, itemId);
     onSelectionClick(itemClicked);
   };
 
