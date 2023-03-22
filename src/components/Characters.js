@@ -41,17 +41,18 @@ const Characters = () => {
 
     const addItems = (selectedChar, newItem) => {
         const updatedItems = [...charItems, newItem];
-        localStorage.setItem(`${selectedChar}items`,JSON.stringify(updatedItems));
+        console.log(updatedItems);
+        localStorage.setItem(`${selectedChar}items`,JSON.parse(JSON.stringify(updatedItems)));
     }
 
     const handleItems = (newItem) => {
-        console.log("hi");
-        addItems(selectedChar, newItem);
+        console.log(newItem);
+        // addItems(selectedChar, newItem);
         // deleteItems(char,item)
     }
 
     return <>
-        <Selection onItemClick={handleItems}/>
+        <Selection onSelectionClick={handleItems}/>
         <div className="characters">
             {chars.length > 0 && 
                 chars.map((char) => (

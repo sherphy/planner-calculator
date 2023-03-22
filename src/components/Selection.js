@@ -3,12 +3,12 @@ import React from "react";
 import ItemCategory from "../assets/ItemCategory";
 import ItemSetCategory from "../assets/ItemSetCategory"
 
-const Selection = ({onItemClick}) => {
+const Selection = ({onSelectionClick}) => {
 
   const handleItemClick = (e) => {
     console.log(e.target.parentElement);
-    const itemClicked = e.target;
-    onItemClick(itemClicked);
+    const itemClicked = e.target.parentElement;
+    onSelectionClick(itemClicked);
   };
 
 

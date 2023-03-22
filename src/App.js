@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className="app-container">
-        <Selection/>
+        {/* <Selection/> */}
         <Characters/>
       </div>
     </>

@@ -8,6 +8,10 @@ const ItemCategory = ({ title, items, points, onItemClick}) => {
     setIsActive(!isActive);
     };
 
+    // const handleClick = () => {
+    //     onItemClick();
+    // }
+
     return (
     <>
     <div className="item-category">
