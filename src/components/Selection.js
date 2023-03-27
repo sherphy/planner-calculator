@@ -3,7 +3,18 @@ import React from "react";
 import ItemCategory from "../assets/ItemCategory";
 import ItemSetCategory from "../assets/ItemSetCategory"
 
-const Selection = () => {
+
+const Selection = ({onSelectionClick}) => {
+
+  const handleItemClick = (e) => {
+    console.log(e.target.parentElement);
+    const itemClicked = e.target.parentElement;
+    const points = itemClicked.dataset.points;
+    const itemId = itemClicked.dataset.item;
+    const newItem = { id: itemId, points: points };
+    console.log(points, itemId);
+    onSelectionClick(newItem);
+  };
 
   return (
     <div className="selection-container">
@@ -20,6 +31,7 @@ const Selection = () => {
         <ItemCategory
           title="HATS"
           items={["1005145", "1005459", "1005460", "1005965"]}
+          onItemClick={(e) => handleItemClick(e)}
         />
         <ItemCategory
           title="PETS"

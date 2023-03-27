@@ -3,17 +3,10 @@ import Card from '../assets/Card';
 import './Characters.css';
 
 const Characters = () => {
-
-    //create new character
-    const [newChar, setnewChar] = useState('');
-    //array of characters
+    const [newIGN, setNewIGN] = useState('');
+    //object of character, has properties of name and items 
     const [chars, setChars] = useState([]);
-    //click specific character
-    const [selectedChar, setSelectedChar] = useState(null);
-    //items belonging to particular character
-    const [charItems, setCharItems] = useState([]);
-    //clicking an item 
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedChar, setSelectedChar] = useState("");
 
     //check if there are any stored characters in localStorage
     useEffect(() => {
@@ -28,65 +21,63 @@ const Characters = () => {
         e.preventDefault();
         //when submitting an ign, it gives the character an ign 
         //and then sets the character and items
-        if (newChar) {
-            const updatedChars = [...chars, newChar];
+        if (newIGN) {
+            const updatedChars = [...chars, {name: newIGN, items: []}];
             setChars(updatedChars);
             localStorage.setItem("characters",JSON.stringify(updatedChars));
-            // give the new character an empty array of items
-            localStorage.setItem(`${newChar}items`,JSON.stringify([]));
-            setnewChar("");
+            //refresh
+            setNewIGN("");
         }
     }
 
-    // get the items for the selected character from localStorage
-    const getCharItems = (selectedChar) => {
-        const storedItems = JSON.parse(localStorage.getItem(`${selectedChar}items`,JSON.stringify([])));
-        return storedItems || [];
+    const addItems = (newItem) => {
+        const updatedChars = chars.map((char) => {
+            if (char.name === selectedChar) {
+                //add new item to character items
+                const updatedItem = [...char.items, newItem];
+                //update character with new items
+                const updatedChar = {...char, items: updatedItem};
+                //replace current character in array 
+                const charIndex = chars.findIndex(char => char.name === selectedChar);
+                const updatedChars = [...chars.slice(0, charIndex), updatedChar, ...chars.slice(charIndex + 1)];
+                localStorage.setItem("characters", JSON.stringify(updatedChars));
+                return updatedChar;
+            } else {
+                return char;
+            }
+        });
+        setChars(updatedChars);
+        console.log(updatedChars);
     }
 
-    const addItems = (selectedChar, newItem) => {
-        const storedItems = getCharItems(selectedChar);
-        const updatedItems = [...storedItems, newItem];
-        localStorage.setItem(`${selectedChar}items`,JSON.stringify(updatedItems));
-        setCharItems(updatedItems);
-      }
-
-    const handleItems = (itemClicked) => {
-        addItems(selectedChar, itemClicked);
+    const handleSelectedItem = (selectedItem) => {
+        addItems(selectedItem);
+        console.log(selectedItem);
         // deleteItems(char,item)
     }
 
-    return (
-      <>
+    return <>
+        <Selection onSelectionClick={handleSelectedItem}/>
         <div className="characters">
-          {chars.length > 0 &&
-            chars.map((char) => (
-              <Card
-                char={char}
-                key={char}
-                items={getCharItems(char)}
-                onCharClick={() => setSelectedChar(char)
-                }
-              />
-            ))}
-            {selectedChar &&
-              <>
-              {console.log(selectedChar)}
-              </>
-            }
+            {chars.length > 0 && 
+            <>
+                {chars.map((char) => (
+                    <Card
+                        char={char.name}
+                        key={char.name}
+                        items={char.items}
+                        onClick={() => setSelectedChar(char.name)}/>
+                ))};
+            </>
+        }
 
-          <div id="add-char" className="cards">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                value={newChar}
-                placeholder="Character Name"
-                onChange={(e) => setnewChar(e.target.value)}
-              />
-              <button type="submit">Add</button>
-            </form>
-          </div>
-          {/* <div id="calculate" className="cards">
+            <div id="add-char" className="cards">
+                <form onSubmit={handleSubmit}>
+                <input type="text" value={newIGN} placeholder="Character Name" onChange={(e)=> setNewIGN(e.target.value)}/>
+                <button type="submit">Add</button>
+                </form>
+            </div>
+            {/* <div id="calculate" className="cards">
                 Calculate
             </div> */}
         </div>

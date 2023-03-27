@@ -5,9 +5,14 @@ const Card = ({char, onCharClick, items, onItemAdd}) => {
   return (
     <div onClick={onCharClick} className='cards'>
         <h1>{char.toUpperCase()}</h1>
-        {items.map(item => (
-          <p>{item}</p>
-        ))}
+        <div className="char-items">
+  {items.map((item) => (
+    <p className="char-item" key={item.id}> 
+      {item.id}
+      {item.points}
+    </p>
+  ))}
+</div>
     </div>
   )
 }
