@@ -34,6 +34,14 @@ const Characters = () => {
     const addItems = (newItem) => {
         const updatedChars = chars.map((char) => {
             if (char.name === selectedChar) {
+                 // Check if unique
+                const itemExists = char.items.some((item) => item.id === newItem.id);
+                
+                if (itemExists) {
+                    return char;
+                }
+                
+                else {
                 //add new item to character items
                 const updatedItem = [...char.items, newItem];
                 //update character with new items
@@ -43,12 +51,12 @@ const Characters = () => {
                 const updatedChars = [...chars.slice(0, charIndex), updatedChar, ...chars.slice(charIndex + 1)];
                 localStorage.setItem("characters", JSON.stringify(updatedChars));
                 return updatedChar;
+                }
             } else {
                 return char;
             }
         });
         setChars(updatedChars);
-        console.log(updatedChars);
     }
 
     const handleSelectedItem = (selectedItem) => {
@@ -68,7 +76,7 @@ const Characters = () => {
                         key={char.name}
                         items={char.items}
                         onClick={() => setSelectedChar(char.name)}/>
-                ))};
+                ))}
             </>
         }
 
