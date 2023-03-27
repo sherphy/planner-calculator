@@ -3,7 +3,6 @@ import React from "react";
 import ItemCategory from "../assets/ItemCategory";
 import ItemSetCategory from "../assets/ItemSetCategory"
 
-
 const Selection = ({onSelectionClick}) => {
 
   const handleItemClick = (e) => {

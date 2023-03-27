@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from '../assets/Card';
+import Selection from './Selection.js'
 import './Characters.css';
 
 const Characters = () => {
@@ -89,8 +90,7 @@ const Characters = () => {
                 Calculate
             </div> */}
         </div>
-      </>
-    );
+    </>
 };
 
 export default Characters;
