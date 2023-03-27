@@ -10,8 +10,9 @@ const Selection = ({onSelectionClick}) => {
     const itemClicked = e.target.parentElement;
     const points = itemClicked.dataset.points;
     const itemId = itemClicked.dataset.item;
+    const newItem = { id: itemId, points: points };
     console.log(points, itemId);
-    onSelectionClick(itemClicked);
+    onSelectionClick(newItem);
   };
 
 

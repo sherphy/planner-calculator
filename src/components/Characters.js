@@ -5,10 +5,10 @@ import Selection from "./Selection";
 
 
 const Characters = () => {
-    const [newChar, setnewChar] = useState('');
+    const [newIGN, setNewIGN] = useState('');
+    //object of character, has properties of name and items 
     const [chars, setChars] = useState([]);
-    const [charItems, setCharItems] = useState([]);
-    const [selectedChar, setSelectedChar] = useState(null);
+    const [selectedChar, setSelectedChar] = useState("");
 
     //check if there are any stored characters in localStorage
     useEffect(() => {
@@ -22,59 +22,59 @@ const Characters = () => {
         e.preventDefault();
         //when submitting an ign, it gives the character an ign 
         //and then sets the character and items
-        if (newChar) {
-            const updatedChars = [...chars, newChar];
+        if (newIGN) {
+            const updatedChars = [...chars, {name: newIGN, items: []}];
             setChars(updatedChars);
             localStorage.setItem("characters",JSON.stringify(updatedChars));
-            // give the new character an empty array of items
-            localStorage.setItem(`${newChar}items`,JSON.stringify([]));
-            setnewChar("");
+            //refresh
+            setNewIGN("");
         }
     }
 
-    // get the items for the selected character from localStorage
-    const getCharItems = (selectedChar) => {
-        const storedItems = JSON.parse(localStorage.getItem(`${selectedChar}items`,JSON.stringify([])));
-        setCharItems(storedItems);
-        return storedItems || [];
-    }
-
     const addItems = (newItem) => {
-        const updatedItems = [...charItems, newItem];
-        console.log(updatedItems);
-        localStorage.setItem(`${selectedChar}items`,JSON.parse(JSON.stringify(updatedItems)));
+        const updatedChars = chars.map((char) => {
+            if (char.name === selectedChar) {
+                //add new item to character items
+                const updatedItem = [...char.items, newItem];
+                //update character with new items
+                const updatedChar = {...char, items: updatedItem};
+                //replace current character in array 
+                const charIndex = chars.findIndex(char => char.name === selectedChar);
+                const updatedChars = [...chars.slice(0, charIndex), updatedChar, ...chars.slice(charIndex + 1)];
+                localStorage.setItem("characters", JSON.stringify(updatedChars));
+                return updatedChar;
+            } else {
+                return char;
+            }
+        });
+        setChars(updatedChars);
+        console.log(updatedChars);
     }
 
-    const handleItems = (selectedItem) => {
-        console.log(selectedItem);
+    const handleSelectedItem = (selectedItem) => {
         addItems(selectedItem);
+        console.log(selectedItem);
         // deleteItems(char,item)
     }
 
     return <>
-        <Selection onSelectionClick={handleItems}/>
+        <Selection onSelectionClick={handleSelectedItem}/>
         <div className="characters">
             {chars.length > 0 && 
-                chars.map((char) => (
+            <>
+                {chars.map((char) => (
                     <Card
-                        char={char}
-                        key={char}
-                        items={charItems}
-                        onCharClick={() => setSelectedChar(char)}/>
-            /* <div className="char-items">
-                        {items.map((item) => (
-                            <p className="char-item" key={item.id}> 
-                                {item}
-                            </p>
-                        ))}
-                    </div> */
-            ))}
-                                    {console.log(selectedChar)};
-
+                        char={char.name}
+                        key={char.name}
+                        items={char.items}
+                        onClick={() => setSelectedChar(char.name)}/>
+                ))};
+            </>
+        }
 
             <div id="add-char" className="cards">
                 <form onSubmit={handleSubmit}>
-                <input type="text" value={newChar} placeholder="Character Name" onChange={(e)=> setnewChar(e.target.value)}/>
+                <input type="text" value={newIGN} placeholder="Character Name" onChange={(e)=> setNewIGN(e.target.value)}/>
                 <button type="submit">Add</button>
                 </form>
             </div>
