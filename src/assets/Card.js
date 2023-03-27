@@ -1,10 +1,10 @@
 import React from 'react'
 import ItemDetails from './ItemDetails'
 
-const Card = ({char, onCharClick, items, onItemAdd}) => {
+const Card = ({char, onClick, items}) => {
   
   return (
-    <div onClick={onCharClick} className='cards'>
+    <div onClick={onClick} className='cards'>
         <h1>{char.toUpperCase()}</h1>
         <div className="char-items">
           {/* DELETE OLD CODE
