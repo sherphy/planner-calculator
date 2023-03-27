@@ -7,12 +7,10 @@ import ItemSetCategory from "../assets/ItemSetCategory"
 const Selection = ({onSelectionClick}) => {
 
   const handleItemClick = (e) => {
-    console.log(e.target.parentElement);
-    const itemClicked = e.target.parentElement;
+    const itemClicked = e.target.closest('div');
     const points = itemClicked.dataset.points;
     const itemId = itemClicked.dataset.item;
-    const newItem = { id: itemId, points: points };
-    console.log(points, itemId);
+    const newItem = { id: itemId, points: points};
     onSelectionClick(newItem);
   };
 
@@ -37,6 +35,7 @@ const Selection = ({onSelectionClick}) => {
           title="PETS"
           items={["5000736","5000737","5000738","5000979","5000980","5000981"]}
           points={50}
+          onItemClick={(e) => handleItemClick(e)}
         />
         {/* <h1 className="set">SET</h1>
         <h1 className="pets">PETS</h1>
