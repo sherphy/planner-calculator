@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Card = ({char, onClick, items}) => {
+const Card = ({char, onCharClick, items, onItemAdd}) => {
   
   return (
-    <div onClick={onClick} className='cards'>
+    <div onClick={onCharClick} className='cards'>
         <h1>{char.toUpperCase()}</h1>
         <div className="char-items">
   {items.map((item) => (

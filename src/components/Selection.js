@@ -3,6 +3,7 @@ import React from "react";
 import ItemCategory from "../assets/ItemCategory";
 import ItemSetCategory from "../assets/ItemSetCategory"
 
+
 const Selection = ({onSelectionClick}) => {
 
   const handleItemClick = (e) => {
@@ -14,7 +15,6 @@ const Selection = ({onSelectionClick}) => {
     console.log(points, itemId);
     onSelectionClick(newItem);
   };
-
 
   return (
     <div className="selection-container">

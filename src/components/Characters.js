@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from '../assets/Card';
 import './Characters.css';
-import Selection from "./Selection";
-
 
 const Characters = () => {
     const [newIGN, setNewIGN] = useState('');
@@ -16,7 +14,8 @@ const Characters = () => {
         if (storedChars) {
             setChars(storedChars)
         }
-    }, []);    
+    }, []);
+    //CHECK THROUGH FOR ALL THEIR ITEMS AND RENDER ALSO    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -82,7 +81,8 @@ const Characters = () => {
                 Calculate
             </div> */}
         </div>
-    </>;
+      </>
+    );
 };
 
 export default Characters;

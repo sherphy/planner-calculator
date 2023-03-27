@@ -21,6 +21,11 @@ export default function ItemDetails({ itemId, points, onClick}) {
     fetchItemData();
   }, [itemId]);
 
+  const onItemClick = (e) => {
+    const itemClicked = e.target.parentElement;
+    console.log(itemClicked);
+    console.log("item-details");
+}
 
   return (
     <>
