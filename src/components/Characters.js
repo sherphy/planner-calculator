@@ -3,6 +3,8 @@ import Card from '../assets/Card';
 import Selection from './Selection.js'
 import './Characters.css';
 
+let setPoints = 25;
+
 const Characters = () => {
     const [newIGN, setNewIGN] = useState('');
     //object of character, has properties of name and items 
@@ -39,10 +41,12 @@ const Characters = () => {
             if (Array.isArray(newItem.id)) {
                 // If the selected item is an array (i.e. an item set), check each item in the set for uniqueness
                 updatedItems = [...char.items];
-                newItem.id.forEach((itemId) => {
+                newItem.id.forEach((itemId, index) => {
                     const itemExists = updatedItems.some((item) => item.id === itemId);
                     if (!itemExists) {
-                        updatedItems.push({ id: itemId, points: newItem.points });
+                        //for first item, gives setPoints, otherwise unlisted points
+                        const points = index === 0 ? setPoints : '-';
+                        updatedItems.push({ id: itemId, points: points });
                     }
                 });
             } else {
@@ -88,7 +92,7 @@ const Characters = () => {
             </>
         }
 
-            <div id="add-char" className="cards">
+            <div id="add-char" className="card-container">
                 <form onSubmit={handleSubmit}>
                 <input type="text" value={newIGN} placeholder="Character Name" onChange={(e)=> setNewIGN(e.target.value)}/>
                 <button type="submit">Add</button>

@@ -16,9 +16,7 @@ const Selection = ({onSelectionClick}) => {
 
   const handleSetClick = (set) => {
     const itemIds = set.items;
-    const points = 0;
-    const newSet = { id: itemIds, points: points};
-    console.log(newSet);
+    const newSet = { id: itemIds};
     onSelectionClick(newSet);
   }
 

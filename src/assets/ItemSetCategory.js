@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ItemCategory from "./ItemCategory";
 
+let setPoints = 25;
+
 const SetCategory = ({ sets, onClick }) => {
     const [isActive, setIsActive] = useState(true);
 
@@ -12,7 +14,7 @@ const SetCategory = ({ sets, onClick }) => {
     <>
     <div className="set-category">
         <button onClick={handleToggle} className={isActive ? 'uncollapsed' : 'collapsed'}>
-            <h1>SETS (25 points)</h1>
+            <h1>SETS ({setPoints} points)</h1>
         </button>
     </div>
     {isActive && 
