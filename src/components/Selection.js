@@ -16,10 +16,10 @@ const Selection = ({onSelectionClick}) => {
 
   const handleSetClick = (set) => {
     const itemIds = set.items;
-    const points = 25;
+    const points = 0;
     const newSet = { id: itemIds, points: points};
     console.log(newSet);
-    // onSelectionClick(newSet);
+    onSelectionClick(newSet);
   }
 
   return (
@@ -32,7 +32,7 @@ const Selection = ({onSelectionClick}) => {
             items:["1005990", "1005991", "1073635", "1053842", "1703199"],
           },
           {
-            title:"Sweetest Dream",
+            title:"Sweetest Dream Set",
             items: ["1005793","1005794","1012740","1053714","1053715","1073539", "1073540", "1703090"]
           }
         ]}

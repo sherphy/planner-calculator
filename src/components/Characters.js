@@ -35,31 +35,41 @@ const Characters = () => {
         const updatedChars = chars.map((char) => {
             if (char.name === selectedChar) {
                  // Check if unique
+            let updatedItems;
+            if (Array.isArray(newItem.id)) {
+                // If the selected item is an array (i.e. an item set), check each item in the set for uniqueness
+                updatedItems = [...char.items];
+                newItem.id.forEach((itemId) => {
+                    const itemExists = updatedItems.some((item) => item.id === itemId);
+                    if (!itemExists) {
+                        updatedItems.push({ id: itemId, points: newItem.points });
+                    }
+                });
+            } else {
+                // If the selected item is not an array (i.e. an individual item), check for uniqueness
                 const itemExists = char.items.some((item) => item.id === newItem.id);
                 if (itemExists) {
                     return char;
                 }
-                else {
-                //add new item to character items
-                const updatedItem = [...char.items, newItem];
-                //update character with new items
-                const updatedChar = {...char, items: updatedItem};
-                //replace current character in array 
-                const charIndex = chars.findIndex(char => char.name === selectedChar);
-                const updatedChars = [...chars.slice(0, charIndex), updatedChar, ...chars.slice(charIndex + 1)];
-                localStorage.setItem("characters", JSON.stringify(updatedChars));
-                return updatedChar;
-                }
-            } else {
-                return char;
+                // Add new item to character items
+                updatedItems = [...char.items, newItem];
             }
-        });
-        setChars(updatedChars);
-    }
+            // Update character with new items
+            const updatedChar = {...char, items: updatedItems};
+            // Replace current character in array
+            const charIndex = chars.findIndex(char => char.name === selectedChar);
+            const updatedChars = [...chars.slice(0, charIndex), updatedChar, ...chars.slice(charIndex + 1)];
+            localStorage.setItem("characters", JSON.stringify(updatedChars));
+            return updatedChar;
+        } else {
+            return char;
+        }
+    });
+    setChars(updatedChars);
+}
 
     const handleSelectedItem = (selectedItem) => {
         addItems(selectedItem);
-        console.log(selectedItem);
         // deleteItems(char,item)
     }
 
