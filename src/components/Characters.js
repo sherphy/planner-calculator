@@ -36,11 +36,9 @@ const Characters = () => {
             if (char.name === selectedChar) {
                  // Check if unique
                 const itemExists = char.items.some((item) => item.id === newItem.id);
-                
                 if (itemExists) {
                     return char;
                 }
-                
                 else {
                 //add new item to character items
                 const updatedItem = [...char.items, newItem];

@@ -10,8 +10,17 @@ const Selection = ({onSelectionClick}) => {
     const points = itemClicked.dataset.points;
     const itemId = itemClicked.dataset.item;
     const newItem = { id: itemId, points: points};
+    console.log(newItem);
     onSelectionClick(newItem);
   };
+
+  const handleSetClick = (set) => {
+    const itemIds = set.items;
+    const points = 25;
+    const newSet = { id: itemIds, points: points};
+    console.log(newSet);
+    // onSelectionClick(newSet);
+  }
 
   return (
     <div className="selection-container">
@@ -22,8 +31,12 @@ const Selection = ({onSelectionClick}) => {
             title:"Bear Pajamas Set",
             items:["1005990", "1005991", "1073635", "1053842", "1703199"],
           },
-
+          {
+            title:"Sweetest Dream",
+            items: ["1005793","1005794","1012740","1053714","1053715","1073539", "1073540", "1703090"]
+          }
         ]}
+        onClick={(set) => () => handleSetClick(set)}
         />
         <ItemCategory
           title="HATS"

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ItemCategory from "./ItemCategory";
 
-const SetCategory = ({ sets }) => {
+const SetCategory = ({ sets, onClick }) => {
     const [isActive, setIsActive] = useState(true);
 
     const handleToggle = () => {
@@ -19,7 +19,7 @@ const SetCategory = ({ sets }) => {
         <div className="set-selection">
             {sets.map((set) => (
                 // null points if set. do set points calculation differently
-                <ItemCategory key={set.title} title={set.title} items={set.items} points={''}/>
+                <ItemCategory key={set.title} title={set.title} items={set.items} points={''} onItemClick={onClick(set)}/>
             ))}
         </div>}
     </>
