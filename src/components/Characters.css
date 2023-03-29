@@ -41,3 +41,17 @@
     align-items: center;
 }
 
+.item-set {
+    background-color: rgb(231, 249, 217);
+    margin: 0 !important;
+}
+
+.not-item-set {
+    background-color: aliceblue;
+    /* margin: 0 !important; */
+
+}
+
+.not-item-set:nth-child(even) {
+    /* background-color: #FFF; */
+}

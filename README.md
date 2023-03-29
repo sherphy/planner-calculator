@@ -42,4 +42,8 @@ so i
                         return a.title.localeCompare(b.title);
                     }
                 })
-                
+
+
+for inventory, cant decide whether margin 0 or margin 10, 
+then should i alternate different colours for inventory items 
+should i even have background colour for inventory items 

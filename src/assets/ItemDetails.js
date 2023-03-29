@@ -4,7 +4,7 @@ import axios from "axios";
 const region = "gms"; // Replace with your desired region
 const version = "234"; // Replace with your desired version
 
-export default function ItemDetails({ itemId, points, onClick}) {
+export default function ItemDetails({ itemId, points, onClick, className}) {
   const [itemData, setItemData] = useState(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function ItemDetails({ itemId, points, onClick}) {
     <>
       {itemData ? (
         <div
-          className="item-details" onClick={onClick} data-points={points} data-item={itemId}
+          className={`item-details ${className}`} onClick={onClick} data-points={points} data-item={itemId}
           style={{ display: "flex", alignItems: "center", margin: "0.5em 0" }}>
           <img
             src={`https://maplestory.io/api/${region}/${version}/item/${itemId}/icon`}
