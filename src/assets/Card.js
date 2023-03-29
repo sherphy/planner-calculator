@@ -19,12 +19,11 @@ const Card = ({char, onClick, items}) => {
       <div className="card-title">
         <h2>{char.toUpperCase()}</h2>
         <h3 style={{color: 'rgb(241, 145, 155)'}}>Total Points: {totalPoints}</h3>
-        <h3>Average points per day: {Math.ceil(totalPoints/days)}</h3>
+        <h3 style={{color: 'rgb(241, 145, 155)'}}>Average points per day: {Math.ceil(totalPoints/days)}</h3>
         </div>
 
       <div className="char-items">
-  {items
-    .map((item) => (
+  {items.map((item) => (
     <ItemDetails key={item.id} itemId={item.id} points={item.points} onClick={e=>console.log(e)}
     />
   ))}

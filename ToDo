@@ -1,7 +1,6 @@
 scrolling is internal only. dont change the overall webpage
 grid-flex also wtf is going on for that
 
-sort inventory
-if sets somehow bundle together
-calculate average points per day for goal
+sort inventory (by classname?)
+if sets somehow bundle together (make same class and give css for that class?)
 delete items from inventory (in Cards onClick) => ESP SETS 

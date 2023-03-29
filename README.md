@@ -23,3 +23,7 @@ By returning a function from another function, we are able to create a "partiall
 This technique can be useful when we need to set up event handlers that require access to additional data beyond what is provided by the event object.
 
 basically just makes it a function, and function waits to be executed
+
+if i apply this to items only, it works 
+updatedItems.sort((a, b) => a.title.localeCompare(b.title));
+but sets is a bit more delicate because they have the same title 

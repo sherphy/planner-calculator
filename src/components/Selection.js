@@ -9,14 +9,17 @@ const Selection = ({onSelectionClick}) => {
     const itemClicked = e.target.closest('div');
     const points = itemClicked.dataset.points;
     const itemId = itemClicked.dataset.item;
-    const newItem = { id: itemId, points: points};
+    const title = itemClicked.parentElement.parentElement
+    .querySelector('.specific-category').textContent;
+    const newItem = { id: itemId, points: points, title: title};
     console.log(newItem);
     onSelectionClick(newItem);
   };
 
   const handleSetClick = (set) => {
     const itemIds = set.items;
-    const newSet = { id: itemIds};
+    const newSet = { id: itemIds, title: set.title};
+    console.log(newSet);
     onSelectionClick(newSet);
   }
 
