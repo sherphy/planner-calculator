@@ -45,11 +45,12 @@ const Characters = () => {
                         if (!itemExists) {
                             //for first item, gives setPoints, otherwise unlisted points
                             const points = index === 0 ? setPoints : "-";
-                            updatedItems.push({ id: itemId, points: points });
+                            updatedItems.push({ id: itemId, points: points, title: newItem.title });
                         }
                     });
-                } else {
-                    // single items
+                } 
+                // single items
+                else {
                     const itemExists = char.items.some((item) => item.id === newItem.id);
                     // if item already added before
                     if (itemExists) {
@@ -58,8 +59,22 @@ const Characters = () => {
                     // otherwise add the new item 
                     updatedItems = [...char.items, newItem];
                 }
+
                 // sort by category
-                updatedItems.sort((a, b) =>  a.title && b.title ? a.title.localeCompare(b.title) : 0);
+                updatedItems.sort((a,b) => {
+                    //if it contains "set" push downwards
+                    if (a.title.includes("Set") && !b.title.trim().includes("Set")) {
+                        return 1;
+                    }
+                    else if (!a.title.includes("Set") && b.title.trim().includes("Set")) {
+                        return -1;
+                    }
+                    //if both contain/dont contain space, compare alphabetically
+                    else {
+                        return a.title.localeCompare(b.title);
+                    }
+                })
+
                 // update CHOSEN char with new items
                 const updatedChar = { ...char, items: updatedItems };
                 // update chosen char in array

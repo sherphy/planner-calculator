@@ -27,3 +27,19 @@ basically just makes it a function, and function waits to be executed
 if i apply this to items only, it works 
 updatedItems.sort((a, b) => a.title.localeCompare(b.title));
 but sets is a bit more delicate because they have the same title 
+so i 
+ // sort by category
+                updatedItems.sort((a,b) => {
+                    //if it contains "set" push downwards
+                    if (a.title.includes("Set") && !b.title.trim().includes("Set")) {
+                        return 1;
+                    }
+                    else if (!a.title.includes("Set") && b.title.trim().includes("Set")) {
+                        return -1;
+                    }
+                    //if both contain/dont contain space, compare alphabetically
+                    else {
+                        return a.title.localeCompare(b.title);
+                    }
+                })
+                

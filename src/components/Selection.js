@@ -12,7 +12,6 @@ const Selection = ({onSelectionClick}) => {
     const title = itemClicked.parentElement.parentElement
     .querySelector('.specific-category').textContent;
     const newItem = { id: itemId, points: points, title: title};
-    console.log(newItem);
     onSelectionClick(newItem);
   };
 
