@@ -48,7 +48,7 @@ const Characters = () => {
                             updatedItems.push({ id: itemId, points: points, title: newItem.title });
                         }
                     });
-                } 
+                }
                 // single items
                 else {
                     const itemExists = char.items.some((item) => item.id === newItem.id);
@@ -61,7 +61,7 @@ const Characters = () => {
                 }
 
                 // sort by category
-                updatedItems.sort((a,b) => {
+                updatedItems.sort((a, b) => {
                     //if it contains "set" push downwards
                     if (a.title.includes("Set") && !b.title.trim().includes("Set")) {
                         return 1;
@@ -93,6 +93,39 @@ const Characters = () => {
         setChars(updatedChars);
     };
 
+    const handleItemDelete = (itemId) => {
+        const updatedChars = chars.map((char) => {
+            // find the item to delete
+            const itemIndex = char.items.findIndex((item) => item.id === itemId);
+            // if item exists
+            if (itemIndex !== -1) {
+                // copy items without the item to delete
+                const updatedItems = [
+                    ...char.items.slice(0, itemIndex),
+                    ...char.items.slice(itemIndex + 1),
+                ];
+                // update the chosen char in array
+                if (char.name === selectedChar) {
+                    const updatedChar = { ...char, items: updatedItems };
+                    const charIndex = chars.findIndex((char) => char.name === selectedChar);
+                    const updatedChars = [
+                        ...chars.slice(0, charIndex),
+                        updatedChar,
+                        ...chars.slice(charIndex + 1),
+                    ];
+                    localStorage.setItem("characters", JSON.stringify(updatedChars));
+                    return updatedChar;
+                }
+                // otherwise just return the updated char
+                else {
+                    return { ...char, items: updatedItems };
+                }
+            }
+            return char;
+        });
+        setChars(updatedChars);
+    };
+
     const handleSelectedItem = (selectedItem) => {
         addItems(selectedItem);
         // deleteItems(char,item)
@@ -110,6 +143,7 @@ const Characters = () => {
                                 key={char.name}
                                 items={char.items}
                                 onClick={() => setSelectedChar(char.name)}
+                                onItemDelete={(itemId) => handleItemDelete(itemId)}
                             />
                         ))}
                     </>
@@ -132,6 +166,6 @@ const Characters = () => {
             </div>
         </>
     );
-};
+}
 
-export default Characters;
+    export default Characters
