@@ -95,45 +95,33 @@ const Characters = () => {
 
     const handleItemDelete = (itemId) => {
         const updatedChars = chars.map((char) => {
-            // find the item to delete
+            //for specific character
+            if (char.name === selectedChar) {
+                // index of item to delete
             const itemIndex = char.items.findIndex((item) => item.id === itemId);
-            // if item exists
-            if (itemIndex !== -1) {
                 // copy items without the item to delete
                 const updatedItems = [
                     ...char.items.slice(0, itemIndex),
                     ...char.items.slice(itemIndex + 1),
                 ];
-                // update the chosen char in array
-                if (char.name === selectedChar) {
-                    const updatedChar = { ...char, items: updatedItems };
-                    const charIndex = chars.findIndex((char) => char.name === selectedChar);
-                    const updatedChars = [
-                        ...chars.slice(0, charIndex),
-                        updatedChar,
-                        ...chars.slice(charIndex + 1),
-                    ];
-                    localStorage.setItem("characters", JSON.stringify(updatedChars));
-                    return updatedChar;
-                }
-                // otherwise just return the updated char
-                else {
-                    return { ...char, items: updatedItems };
-                }
+                const updatedChar = { ...char, items: updatedItems };
+                const charIndex = chars.findIndex((char) => char.name === selectedChar);
+                const updatedChars = [
+                    ...chars.slice(0, charIndex),
+                    updatedChar,
+                    ...chars.slice(charIndex + 1),
+                ];
+                localStorage.setItem("characters", JSON.stringify(updatedChars));
+                return updatedChar;
             }
             return char;
         });
         setChars(updatedChars);
     };
 
-    const handleSelectedItem = (selectedItem) => {
-        addItems(selectedItem);
-        // deleteItems(char,item)
-    };
-
     return (
         <>
-            <Selection onSelectionClick={handleSelectedItem} />
+            <Selection onSelectionClick={addItems} />
             <div className="characters">
                 {chars.length > 0 && (
                     <>
@@ -168,4 +156,4 @@ const Characters = () => {
     );
 }
 
-    export default Characters
+export default Characters
