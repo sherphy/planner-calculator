@@ -43,7 +43,7 @@
 
 .item-set {
     background-color: rgb(231, 249, 217);
-    margin: 0 !important;
+    /* margin: 0 !important; */
 }
 
 .not-item-set {
@@ -53,5 +53,5 @@
 }
 
 .not-item-set:nth-child(even) {
-    /* background-color: #FFF; */
+    background-color: #FFF;
 }
