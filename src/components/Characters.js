@@ -33,72 +33,86 @@ const Characters = () => {
     };
 
     const addItems = (newItem) => {
-        const updatedChars = chars.map((char) => {
-            if (char.name === selectedChar) {
-                // check if unique
-                let updatedItems;
-                //for sets
-                if (Array.isArray(newItem.id)) {
-                    updatedItems = [...char.items];
-                    newItem.id.forEach((itemId, index) => {
-                        const itemExists = updatedItems.some((item) => item.id === itemId);
-                        if (!itemExists) {
-                            //for first item, gives setPoints, otherwise unlisted points
-                            const points = index === 0 ? setPoints : "-";
-                            updatedItems.push({ id: itemId, points: points, title: newItem.title });
+        setChars((chars) => {
+            return chars.map((char) => {
+                if (char.name === selectedChar) {
+                    // check if unique
+                    let updatedItems;
+                    //for sets
+                    if (Array.isArray(newItem.id)) {
+                        updatedItems = [...char.items];
+                        newItem.id.forEach((itemId, index) => {
+                            const itemExists = updatedItems.some(
+                                (item) => item.id === itemId
+                            );
+                            if (!itemExists) {
+                                //for first item, gives setPoints, otherwise unlisted points
+                                const points = index === 0 ? setPoints : "-";
+                                updatedItems.push({
+                                    id: itemId,
+                                    points: points,
+                                    title: newItem.title,
+                                });
+                            }
+                        });
+                    }
+                    // single items
+                    else {
+                        const itemExists = char.items.some(
+                            (item) => item.id === newItem.id
+                        );
+                        // if item already added before
+                        if (itemExists) {
+                            return char;
+                        }
+                        // otherwise add the new item
+                        updatedItems = [...char.items, newItem];
+                    }
+
+                    // sort by category
+                    updatedItems.sort((a, b) => {
+                        //if it contains "set" push downwards
+                        if (a.title.includes("Set") && !b.title.trim().includes("Set")) {
+                            return 1;
+                        } else if (
+                            !a.title.includes("Set") &&
+                            b.title.trim().includes("Set")
+                        ) {
+                            return -1;
+                        }
+                        //if both contain/dont contain space, compare alphabetically
+                        else {
+                            return a.title.localeCompare(b.title);
                         }
                     });
-                }
-                // single items
-                else {
-                    const itemExists = char.items.some((item) => item.id === newItem.id);
-                    // if item already added before
-                    if (itemExists) {
-                        return char;
-                    }
-                    // otherwise add the new item 
-                    updatedItems = [...char.items, newItem];
-                }
 
-                // sort by category
-                updatedItems.sort((a, b) => {
-                    //if it contains "set" push downwards
-                    if (a.title.includes("Set") && !b.title.trim().includes("Set")) {
-                        return 1;
-                    }
-                    else if (!a.title.includes("Set") && b.title.trim().includes("Set")) {
-                        return -1;
-                    }
-                    //if both contain/dont contain space, compare alphabetically
-                    else {
-                        return a.title.localeCompare(b.title);
-                    }
-                })
-
-                // update CHOSEN char with new items
-                const updatedChar = { ...char, items: updatedItems };
-                // update chosen char in array
-                const charIndex = chars.findIndex((char) => char.name === selectedChar);
-                const updatedChars = [
-                    ...chars.slice(0, charIndex),
-                    updatedChar,
-                    ...chars.slice(charIndex + 1),
-                ];
-                localStorage.setItem("characters", JSON.stringify(updatedChars));
-                return updatedChar;
-            } else {
-                return char;
-            }
+                    // update CHOSEN char with new items
+                    const updatedChar = { ...char, items: updatedItems };
+                    // update chosen char in array
+                    const charIndex = chars.findIndex(
+                        (char) => char.name === selectedChar
+                    );
+                    const updatedChars = [
+                        ...chars.slice(0, charIndex),
+                        updatedChar,
+                        ...chars.slice(charIndex + 1),
+                    ];
+                    localStorage.setItem("characters", JSON.stringify(updatedChars));
+                    return updatedChar;
+                } else {
+                    return char;
+                }
+            });
         });
-        setChars(updatedChars);
     };
 
     const handleItemDelete = (itemId) => {
-        const updatedChars = chars.map((char) => {
+        setChars(chars => {
+            return chars.map((char) => {
             //for specific character
             if (char.name === selectedChar) {
                 // index of item to delete
-            const itemIndex = char.items.findIndex((item) => item.id === itemId);
+                const itemIndex = char.items.findIndex((item) => item.id === itemId);
                 // copy items without the item to delete
                 const updatedItems = [
                     ...char.items.slice(0, itemIndex),
@@ -116,7 +130,7 @@ const Characters = () => {
             }
             return char;
         });
-        setChars(updatedChars);
+    });
     };
 
     return (
@@ -154,6 +168,6 @@ const Characters = () => {
             </div>
         </>
     );
-}
+};
 
-export default Characters
+export default Characters;
